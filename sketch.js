@@ -1,14 +1,28 @@
+var pressed = false;
 
-function setup() {
+function setup() { // RUNS ONCE AT THE BEGGINING!
     createCanvas(400, 400);
 
 }
 
 
-function draw() {
+function draw() { // FOREVER LOOP!
     background(51);
-    ellipse(mouseX,mouseY,50);
+    noStroke();
+    if(pressed){
+        ellipse(mouseX,mouseY,25);
+    }
+    else{
+        ellipse(mouseX,mouseY,5);
+    }
 
+}
 
+function mousePressed() { // EVENT!
+    pressed = true;
 
+}
+
+function mouseReleased() {
+    pressed = false;
 }
