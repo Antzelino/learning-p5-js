@@ -26,7 +26,6 @@ function draw() {
     var y = r * sin(a);
     vertex(x, y);
   }
-  stroke(0,0,0,0);
   endShape(CLOSE);
   
 }
