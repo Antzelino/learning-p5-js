@@ -5,8 +5,8 @@ var sliderN;
 
 function setup() {
   createCanvas(500, 500);
-  sliderD = createSlider(1, 20, 10);
-  sliderN = createSlider(1, 20, 10);
+  sliderD = createSlider(1, 30, 15, 0.1);
+  sliderN = createSlider(1, 30, 15, 0.1);
 }
 
 function draw() {
