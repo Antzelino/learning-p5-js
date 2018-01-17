@@ -1,34 +1,42 @@
-var pressed = false;
-var mousev;
-var offset;
+var d = 8;
+var n = 5;
+var sliderD;
+var sliderN;
 
-function setup() { // RUNS ONCE AT THE BEGGINING!
-    createCanvas(400, 400);
-    mousev = createVector(mouseX, mouseY);
-    offset = 3;
+function setup() {
+  createCanvas(400, 400);
+  sliderD = createSlider(1, 20, 10, 0.01);
+  sliderN = createSlider(1, 20, 10, 0.01);
+  sliderD.input(draw);
+  sliderN.input(draw);
 }
 
+function draw() {
+  d = sliderD.value();
+  n = sliderN.value();
+  var k = n / d;
+  background(51);
+  push();
+  translate(width / 2, height / 2);
 
-function draw() { // FOREVER LOOP!
-    mousev.x = mouseX;
-    mousev.y = mouseY;
+  beginShape();
+  stroke(255);
+  noFill();
+  strokeWeight(1);
+  for (var a = 0; a < TWO_PI * reduceDenominator(n, d); a += 0.02) {
+    var r = 200 * cos(k * a);
+    var x = r * cos(a);
+    var y = r * sin(a);
+    vertex(x, y);
+  }
+  endShape(CLOSE);
+  pop();
+  noLoop();
+}
 
-    background(51);
-    noStroke();
-    if(pressed){
-        ellipse(mousev.x, mousev.y, 40);
+function reduceDenominator(numerator, denominator) {
+    function rec(a, b) {
+        return b ? rec(b, a % b) : a;
     }
-    else{
-        ellipse(mousev.x, mousev.y, 20);
-    }
-
-}
-
-function mousePressed() { // EVENT!
-    pressed = true;
-
-}
-
-function mouseReleased() { // EVENT!
-    pressed = false;
+    return denominator / rec(numerator, denominator);
 }
